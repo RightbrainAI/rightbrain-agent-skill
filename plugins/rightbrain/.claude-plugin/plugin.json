@@ -1,0 +1,11 @@
+{
+  "name": "rightbrain",
+  "description": "Build and operate Rightbrain Tasks, TaskAgents, knowledge, integrations, and automations using live API contracts.",
+  "version": "2.0.0",
+  "author": {
+    "name": "Rightbrain AI"
+  },
+  "homepage": "https://rightbrain.ai",
+  "repository": "https://github.com/RightbrainAI/rightbrain-agent-skill",
+  "license": "MIT"
+}

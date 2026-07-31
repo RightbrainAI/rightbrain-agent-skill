@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Rightbrain documentation
+    url: https://docs.rightbrain.ai
+    about: API reference, auth guides, and platform concepts.
+  - name: Rightbrain platform
+    url: https://rightbrain.ai
+    about: General product questions, account, and contact.

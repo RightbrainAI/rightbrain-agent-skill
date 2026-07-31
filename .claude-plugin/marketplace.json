@@ -1,0 +1,34 @@
+{
+  "name": "rightbrain-agent-skill",
+  "owner": {
+    "name": "Rightbrain AI",
+    "email": "platform@rightbrain.ai"
+  },
+  "metadata": {
+    "description": "Official Claude Code plugin marketplace for the Rightbrain AI platform"
+  },
+  "plugins": [
+    {
+      "name": "rightbrain",
+      "source": "./plugins/rightbrain",
+      "description": "Build and operate Rightbrain Tasks, TaskAgents, knowledge, integrations, and automations using live API contracts.",
+      "author": {
+        "name": "Rightbrain AI"
+      },
+      "homepage": "https://rightbrain.ai",
+      "repository": "https://github.com/RightbrainAI/rightbrain-agent-skill",
+      "license": "MIT",
+      "keywords": [
+        "rightbrain",
+        "ai",
+        "tasks",
+        "agents",
+        "skills",
+        "integrations",
+        "mcp",
+        "llm",
+        "api"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+name: Feature request
+description: Propose a new capability, workflow, or coverage gap in the skill.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What can't you do today with `rb-api.mjs` / the skill workflows?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed behavior
+      description: What should happen instead? Include a sample command or workflow if useful.
+    validations:
+      required: true
+
+  - type: input
+    id: endpoints
+    attributes:
+      label: Endpoint(s) involved
+      description: |
+        Link the relevant page from https://docs.rightbrain.ai/v-1/llms.txt.
+      placeholder: "e.g. https://docs.rightbrain.ai/api-reference/..."

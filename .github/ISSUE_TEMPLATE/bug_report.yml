@@ -1,0 +1,95 @@
+name: Bug report
+description: Something in the skill or its scripts isn't working as documented.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filing: the installed wrapper's `whoami` output and exit code often
+        tell us more than a description alone. **Never paste a real token, API key, or
+        request payload containing real data** — see the redaction warning below.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you run, and what went wrong?
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: Exact command
+      description: |
+        The exact `rb-api.mjs` or `rb-auth.mjs` invocation that reproduces the issue.
+
+        **REDACT before pasting:** any bearer token, `RB_API_KEY`/`RB_CLIENT_SECRET` value,
+        and any `--data`/`--form`/`--file` payload that contains real (non-fixture) data.
+        Replace secrets with `<redacted>` — do not just truncate them.
+      placeholder: |
+        node "$RB_API" GET /path --data '{"...":"..."}'
+      render: shell
+    validations:
+      required: true
+
+  - type: input
+    id: exit-code
+    attributes:
+      label: Exit code
+      placeholder: "e.g. 3"
+    validations:
+      required: true
+
+  - type: textarea
+    id: stderr
+    attributes:
+      label: stderr output
+      description: Redact any token or secret that appears in the output.
+      render: shell
+
+  - type: textarea
+    id: status-output
+    attributes:
+      label: "`node \"$RB_API\" status` output"
+      description: This command never prints a token. Redact organization and project IDs before pasting.
+      render: shell
+
+  - type: input
+    id: os-node
+    attributes:
+      label: OS and Node version
+      placeholder: "e.g. macOS 15.1, Node 20.11.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: harness
+    attributes:
+      label: Harness
+      options:
+        - Claude Code
+        - Cursor
+        - Other Agent Skills-compatible runtime
+        - Direct script invocation (no agent harness)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - production
+        - staging
+        - local
+    validations:
+      required: true

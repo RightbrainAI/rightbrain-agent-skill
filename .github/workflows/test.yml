@@ -1,0 +1,63 @@
+name: Test
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  node:
+    name: Node ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ["18.x", "20.x", "22.x", "24.x"]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Syntax check scripts
+        run: |
+          node --check plugins/rightbrain/skills/rightbrain/scripts/rb-api.mjs
+          node --check plugins/rightbrain/skills/rightbrain/scripts/rb-auth.mjs
+
+      - name: Run tests
+        run: node --test test/*.test.mjs
+
+  validate:
+    name: Documentation and metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Install pinned official skills-ref validator
+        run: |
+          python -m pip install \
+            "click==8.3.1" \
+            "python-dateutil==2.9.0.post0" \
+            "six==1.17.0" \
+            "strictyaml==1.7.3" \
+            "git+https://github.com/agentskills/agentskills.git@38a2ff82958afee88dadf4831509e6f7e9d8ef4e#subdirectory=skills-ref"
+
+      - name: Validate SKILL.md with official skills-ref
+        run: skills-ref validate plugins/rightbrain/skills/rightbrain
+

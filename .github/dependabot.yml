@@ -1,0 +1,12 @@
+version: 2
+updates:
+  # Workflows pin Actions to immutable SHAs. Dependabot keeps those SHAs current
+  # while the inline release comments make reviews understandable.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      github-actions:
+        patterns:
+          - "*"
