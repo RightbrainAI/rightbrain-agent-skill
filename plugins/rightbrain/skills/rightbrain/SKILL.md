@@ -112,9 +112,26 @@ For example, call a documented
 `/org/{org_id}/project/{project_id}/task` path with its placeholders replaced,
 or call `/task --project-scope`.
 
-Exit codes: `0` success, `2` unauthenticated, `3` rejected authentication, `4`
+Exit codes: `0` transport success, `2` unauthenticated, `3` rejected authentication, `4`
 usage/configuration/network error, and `5` API HTTP error. Fix the cause; do not
 blindly retry.
+
+### Verify the execution outcome
+
+HTTP 200 and wrapper exit code 0 do not prove that an agent run completed.
+For `--sse`, inspect the JSON data events using the current live contract:
+`error` means failure, `approval_required` means paused, and `done` is the
+completion event. A stream that closes without a terminal outcome is
+incomplete. Preserve the session, run, and approval IDs that were returned.
+
+After a disconnect or ambiguous response, inspect stored run status and tool
+execution records before starting more work. A new run is a new execution;
+do not blindly repeat it. Approval decisions and resuming a paused run are
+separate operations; resolve their current behavior from live docs.
+
+For evals, inspect individual verdicts and pass/fail counts: a completed eval
+can contain failed cases. Report the observed outcome rather than treating
+successful transport as a successful test.
 
 ## Safety
 
