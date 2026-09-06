@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Clarify that successful HTTP/SSE transport does not establish agent-run or eval success. Require inspecting run events, stored status after disconnects, and eval verdicts before reporting completion or retrying work.
+
 ## 2.0.0 - 2026-07-31
 
 First public release.

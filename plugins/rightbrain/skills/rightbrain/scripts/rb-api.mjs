@@ -30,7 +30,8 @@
  *   --secret-output <path> Write a successful JSON response unredacted to a new 0600 file while
  *                         stdout remains redacted. Never overwrites and never prints secrets.
  *   --sse                 Set Accept: text/event-stream and stream the body to stdout line by
- *                         line as it arrives. Exits 0 when the stream ends normally.
+ *                         line as it arrives. Exits 0 when transport ends normally;
+ *                         inspect events for the run's completion, pause, or failure.
  *   --all                 Auto-paginate a `results` list endpoint; emits one merged JSON object
  *                         {results:[...], count:N} instead of one page.
  *   --timeout <ms>        Time allowed to establish a response (default RB_REQUEST_TIMEOUT_MS or
@@ -181,7 +182,7 @@ Options:
   --output <path>   write response body to a file instead of stdout
   --secret-output <path>
                     write full successful JSON to a new 0600 file; stdout stays redacted
-  --sse             stream a text/event-stream response to stdout line by line
+  --sse             stream SSE to stdout; exit 0 is transport success, inspect run events
   --all             auto-paginate a results list; emit {results:[...], count:N}
   --timeout <ms>    response-header timeout (default RB_REQUEST_TIMEOUT_MS or 30000)
   --compact         disable pretty-printing
